@@ -1,11 +1,11 @@
 from consultas import (
-    buscar_livros,
-    detalhes_livro,
-    listar_autores_com_quantidade,
+    buscar_livros_por_titulo,
     listar_livros,
-    livros_por_autor,
+    listar_livros_disponiveis,
+    listar_livros_por_autor,
 )
 from database import criar_banco, nova_sessao
+from operacoes import devolver_livro, emprestar_livro
 from seed import popular_banco
 
 
@@ -17,14 +17,17 @@ with nova_sessao() as session:
     print("\nTodos os livros:")
     listar_livros(session)
 
-    print("\nLivros de um autor:")
-    livros_por_autor(session, "DIGITE AQUI O NOME DE UM AUTOR DO SEU SEED")
+    print("\nLivros disponíveis:")
+    listar_livros_disponiveis(session)
 
     print("\nBusca por parte do título:")
-    buscar_livros(session, "DIGITE AQUI PARTE DE UM TÍTULO")
+    buscar_livros_por_titulo(session, "a")
 
-    print("\nAutores e quantidades:")
-    listar_autores_com_quantidade(session)
+    print("\nLivros de um autor:")
+    listar_livros_por_autor(session, "Nome do Autor")
 
-    print("\nDetalhes de um livro:")
-    detalhes_livro(session, "DIGITE AQUI O TÍTULO DE UM LIVRO DO SEU SEED")
+    print("\nEmprestando um livro:")
+    emprestar_livro(session, "Título do Livro")
+
+    print("\nDevolvendo um livro:")
+    devolver_livro(session, "Título do Livro")
